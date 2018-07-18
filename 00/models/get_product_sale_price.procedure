@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UDE:Procedure xmlns:UDE="http://www.sap.com/ndb/SQLCoreModelUDE.ecore" xmlns:DataTypes="http://www.sap.com/ndb/SQLCoreModelDataTypes.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="get_product_sale_price" schemaVersion="2" procedureType="procedure" runWithInvokerPrivileges="true" language="SQLSCRIPT" accessMode="ReadOnly">
+<descriptions defaultDescription=""/>
+<metadata changedAt ="2018-05-29 16:42:12.341" createdAt="2018-05-29 16:16:26.993"/>
+<origin/>
+<schema id="_SYS_BIC"/>
+<definition> 
+BEGIN
+
+	declare lv_category nvarchar(40) := null;
+	declare lv_discount decimal(15,2) := 0;
+	
+	lt_product = select PRODUCTID, CATEGORY, PRICE from &quot;SAP_HANA_DEMO&quot;.&quot;sap.hana.democontent.epm.data::MD.Products&quot; 
+				  where PRODUCTID = :productid;
+				  
+	select Category into lv_category from :lt_product;
+	
+	if :lv_category = &apos;Notebooks&apos; then
+		lv_discount := .20;
+	elseif :lv_category = &apos;Handhelds&apos; then
+		lv_discount := .25;
+	end if;
+	
+	product_prices = select PRODUCTID, CATEGORY, PRICE, PRICE - cast((PRICE * lv_discount) as decimal(15,2)) as SALEPRICE from :lt_product;
+END;</definition>
+<defaultSchema schemaName="SYSTEM"/>
+<parameters id="productid" paramType="IN">
+  <type xsi:type="DataTypes:CharacterStringSQLDataType" id="NVARCHAR" length="10"/>
+</parameters>
+<parameters id="product_prices" paramType="OUT">
+	<type xsi:type="DataTypes:TableDataType" id="tt_product_sales">
+	  <columns id="PRODUCTID">
+		  <datatypeSQL xsi:type="DataTypes:CharacterStringSQLDataType" id="NVARCHAR" length="10"/>
+	  </columns>
+	  <columns id="CATEGORY">
+		  <datatypeSQL xsi:type="DataTypes:CharacterStringSQLDataType" id="NVARCHAR" length="40"/>
+	  </columns>
+	  <columns id="PRICE">
+		  <datatypeSQL xsi:type="DataTypes:CharacterStringSQLDataType" id="NVARCHAR" length="20"/>
+	  </columns>
+	  <columns id="SALEPRICE">
+		  <datatypeSQL xsi:type="DataTypes:CharacterStringSQLDataType" id="NVARCHAR" length="20"/>
+	  </columns>
+		<schema id="_SYS_BIC"/>
+	</type>
+</parameters>
+<localTableType>create type tt_product_sales as table (
+	PRODUCTID nvarchar(10),
+	CATEGORY nvarchar(40),
+	PRICE nvarchar(20),
+	SALEPRICE nvarchar(20)
+)
+
+</localTableType>
+<header>CREATE PROCEDURE get_product_sale_price (productid nvarchar(10), out product_prices tt_product_sales
+) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA &lt;default_schema_name&gt;
+	READS SQL DATA AS</header>
+</UDE:Procedure>

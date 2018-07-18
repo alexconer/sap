@@ -1,0 +1,3 @@
+schema = "TEST";
+start_with = 1;
+depends_on_table = "lessons.00.data::header";

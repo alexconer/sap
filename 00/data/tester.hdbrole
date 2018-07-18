@@ -1,0 +1,4 @@
+role lessons.00.data::tester {
+	catalog schema "TEST": SELECT;
+	application privilege: lessons.00::Basic;
+}

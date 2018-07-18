@@ -1,0 +1,5 @@
+role lessons.00.data::admin
+	extends role lessons.00.data::tester {
+	catalog schema "TEST": SELECT, UPDATE, INSERT, DELETE, DROP;
+	application privilege: lessons.00::Admin;
+}

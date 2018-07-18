@@ -1,0 +1,3 @@
+schema="TEST";
+query="select * from \"lessons.00.data::header\" order by OrderId DESC";
+depends_on_table = "lessons.00.data::header";
