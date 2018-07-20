@@ -1,4 +1,5 @@
 {
 	"exposed" : true,
-	"authentication": [{"method": "LogonTicket"}, {"method": "Basic"}]
+	"authentication": [{"method": "LogonTicket"}, {"method": "Basic"}],
+	"anonymous_connection" : "lessons.00.data::admin"
 }
