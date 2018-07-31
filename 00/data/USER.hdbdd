@@ -1,0 +1,17 @@
+namespace lessons."00".data;
+
+@Schema: 'TEST'
+context USER {
+
+    type SString: String(40);
+    type LString: String(255);
+    
+    @Catalog.tableType: #COLUMN
+    Entity Details{
+    	key PERS_NO: String(10);
+    	FIRSTNAME: SString;
+    	LASTNAME: SString;
+    	ABOUT: LString;
+    };
+
+};
