@@ -1,0 +1,6 @@
+host = "www.reqres.in";
+port = 80;
+pathPrefix = "/api/users";
+authType = none;
+useProxy = false;
+timeout = 5000;
