@@ -3,7 +3,7 @@ function popUser(){
 	var dest = $.net.http.readDestination('lessons.00.services', "user");
 	
 	var client = new $.net.http.Client();
-	var req = new $.web.WebRequest($.net.http.GET, "");
+	var req = new $.web.WebRequest($.net.http.GET, user);
 	client.request(req, dest);
 	
 	var response = client.getResponse();

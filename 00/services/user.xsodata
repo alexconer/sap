@@ -1,0 +1,6 @@
+service namespace "lessons.services" {
+	"TEST"."lessons.00.data::USER.Details" as "Users"
+	create forbidden
+	update forbidden
+	delete forbidden;
+}
