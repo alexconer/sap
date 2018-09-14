@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Sample"></ModulePrefs>
+	<Content type="html">
+	<![CDATA[
+		<html>
+		<head>
+		<title>Hello World</title>
+		</head>
+		<body><h1>Hello world</h1></body>
+	]]>
+	</Content>
+</Module>

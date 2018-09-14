@@ -1,0 +1,6 @@
+{
+	"name" : "Sample",
+	"specXMLURL" : "/lessons/00/uis/widget1.xml",
+	"description": "OpenSap Sample",
+	"icon" : ""
+}
